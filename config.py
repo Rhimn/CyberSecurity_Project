@@ -1,8 +1,8 @@
 # config.py
 
-# 数据相关配置
-DATA_PATH = './data/cicids2017w/'  # 数据存放路径
-BATCH_SIZE = 64
+DATA_PATH = 'D:\\ContestProject\\Model'  # 存放预处理文件的目录
+BATCH_SIZE = 32 
+
 NUM_WORKERS = 4
 
 # 模型超参数
