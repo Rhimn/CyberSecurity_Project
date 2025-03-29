@@ -23,4 +23,13 @@ https://www.unb.ca/cic/datasets/ids-2017.html
 *具体计算方法还需要根据实际情况进行调整*
 
 *后面的model.py和main.py等文件我还没有测试过，可能会出现报错需要进行调试*
+````
+project/
+├── config.py              # 配置超参数、路径等
+├── data_loader.py         # 数据预处理和加载
+├── models.py              # 模型定义（GCN、GAT、DGC-VAE）
+├── train.py               # 训练脚本（包含训练循环和模型评估）
+├── utils.py               # 工具函数，如日志记录、指标计算等
+└── main.py                # 主程序入口（可选，用于解析命令行参数并调用训练）
+````
 
