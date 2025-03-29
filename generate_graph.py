@@ -15,7 +15,7 @@ def generate_graph_from_csv(input_csv, node_csv, edge_csv):
     print("CSV 文件的列名:", df.columns)
     
     # 检查必要的列是否存在
-    required_columns = ['Flow Duration', 'Destination Port', 'Label']
+    required_columns = ['sport', 'dport', 'attack']
     for col in required_columns:
         if col not in df.columns:
             raise KeyError(f"缺少必要的列: {col}")
@@ -23,9 +23,9 @@ def generate_graph_from_csv(input_csv, node_csv, edge_csv):
     # 2. 生成 node_features.csv
     df_node = pd.DataFrame()
     df_node['node_id'] = df.index  # 行号做 node_id
-    df_node['Src_IP'] = df['Flow Duration']  # 源 IP
-    df_node['Dst_IP'] = df['Destination Port']  # 目标 IP
-    df_node['Label'] = df['Label']  # 标签
+    df_node['Src_IP'] = df['sport']  # 源 IP
+    df_node['Dst_IP'] = df['dport']  # 目标 IP
+    df_node['Label'] = df['attack']  # 标签
     
     # 保存到 node_csv
     df_node.to_csv(node_csv, index=False)
@@ -43,13 +43,24 @@ def generate_graph_from_csv(input_csv, node_csv, edge_csv):
     
     # 根据映射生成边
     edge_list = []
+    # 仅生成100条边
+    
+    for ip, nodes in src_ip_map.items():
+        n = len(nodes)
+        if n > 1:
+            for i in range(min(n, 100)):  # 限制最多生成 100 条边
+                for j in range(i + 1, min(n, 100)):
+                    edge_list.append((nodes[i], nodes[j]))
+
+    '''
+    # 全部生成(内存占用大)
     for ip, nodes in src_ip_map.items():
         n = len(nodes)
         if n > 1:
             for i in range(n):
                 for j in range(i + 1, n):
                     edge_list.append((nodes[i], nodes[j]))
-    
+    '''
     # 转成 DataFrame
     df_edge = pd.DataFrame(edge_list, columns=['source_node_id', 'target_node_id'])
     
@@ -60,7 +71,7 @@ def generate_graph_from_csv(input_csv, node_csv, edge_csv):
 
 if __name__ == "__main__":
     # 你要处理的原始 CSV 文件名
-    input_csv = r"D:\ContestProject\Model\DataBase\MachineLearningCVE\Monday-WorkingHours.pcap_ISCX.csv"
+    input_csv = r"D:\ContestProject\Model\DataBase\UNSW_2018\UNSW_2018_IoT_Botnet_Final_10_best_Training.csv"
     
     # 输出的节点文件和边文件
     node_csv = "node_features.csv"
