@@ -22,5 +22,5 @@ https://www.unb.ca/cic/datasets/ids-2017.html
 **utils.py**用于计算互信息损失
 *具体计算方法还需要根据实际情况进行调整*
 
-==后面的model.py和main.py文件我还没有测试过，可能会出现报错需要进行调试==
+*后面的model.py和main.py等文件我还没有测试过，可能会出现报错需要进行调试*
 
