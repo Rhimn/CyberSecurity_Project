@@ -3,6 +3,9 @@ https://www.unb.ca/cic/datasets/ids-2017.html
 *进入后在页面最下面点击下载-CSVs-选择MachineLearningCSV.zip下载*
 
 ## 关于程序部分
+
+*程序中涉及到的文件路径需要根据自己的电脑实际路径进行替换*
+
 **gengrate_graph.py**用于处理原始数据并生成节点图和边图的程序,运行该文件后会生成相应的`node_features.csv`和`edge_list.csv`
 *边文件生成部分可能占用内存过大需分多部分进行*
 
@@ -19,5 +22,5 @@ https://www.unb.ca/cic/datasets/ids-2017.html
 **utils.py**用于计算互信息损失
 *具体计算方法还需要根据实际情况进行调整*
 
-
+==后面的model.py和main.py文件我还没有测试过，可能会出现报错需要进行调试==
 
